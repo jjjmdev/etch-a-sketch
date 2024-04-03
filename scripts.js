@@ -9,6 +9,9 @@ for (let j = 1; j <= n; j++) {
 		const item = document.createElement("div");
 		item.classList.add("item");
 
+		item.addEventListener("mouseenter", () => {
+			item.style.backgroundColor = "black";
+		});
 		row.appendChild(item);
 	}
 
