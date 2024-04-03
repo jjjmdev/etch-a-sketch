@@ -1,11 +1,12 @@
 const heading = document.querySelector("h1");
-const resetButton = document.querySelector("button");
+const resetButton = document.querySelector("#reset");
+const changeSize = document.querySelector("#change-size");
 const gridContainer = document.querySelector("#grid-container");
 
-let n = 16;
-heading.textContent = `${n}x${n} GRID`;
+let n = 16; // as default
 
-const makeGrid = () => {
+const makeGrid = (n) => {
+	heading.textContent = `${n}x${n} GRID`;
 	gridContainer.replaceChildren();
 
 	for (let j = 1; j <= n; j++) {
@@ -39,5 +40,15 @@ function randomColor() {
 }
 
 resetButton.addEventListener("click", () => makeGrid(n));
+changeSize.addEventListener("click", () => {
+	const value = +prompt("Change grid size, 1-100");
+	console.log(value);
+	if (value > 100) {
+		alert("Invalid input");
+	} else {
+		n = value;
+		makeGrid(n);
+	}
+});
 
 makeGrid(n);
