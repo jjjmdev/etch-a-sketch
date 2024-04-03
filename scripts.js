@@ -1,25 +1,32 @@
+const heading = document.querySelector("h1");
+const resetButton = document.querySelector("button");
 const gridContainer = document.querySelector("#grid-container");
 
 let n = 16;
+heading.textContent = `${n}x${n} GRID`;
 
-for (let j = 1; j <= n; j++) {
-	const row = document.createElement("div");
+const makeGrid = () => {
+	gridContainer.replaceChildren();
 
-	for (let i = 1; i <= n; i++) {
-		const item = document.createElement("div");
-		item.classList.add("item");
+	for (let j = 1; j <= n; j++) {
+		const row = document.createElement("div");
 
-		item.addEventListener("mouseenter", () => {
-			if (!item.style.backgroundColor) {
-				item.style.backgroundColor = randomColor();
-			}
-		});
-		row.appendChild(item);
+		for (let i = 1; i <= n; i++) {
+			const item = document.createElement("div");
+			item.classList.add("item");
+
+			item.addEventListener("mouseenter", () => {
+				if (!item.style.backgroundColor) {
+					item.style.backgroundColor = randomColor();
+				}
+			});
+			row.appendChild(item);
+		}
+
+		row.classList.add("row");
+		gridContainer.appendChild(row);
 	}
-
-	row.classList.add("row");
-	gridContainer.appendChild(row);
-}
+};
 
 function randomNumber(number) {
 	return Math.floor((Math.random() * number * 10) / 10);
@@ -30,3 +37,7 @@ function randomColor() {
 		255
 	)})`;
 }
+
+resetButton.addEventListener("click", () => makeGrid(n));
+
+makeGrid(n);
